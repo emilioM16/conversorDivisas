@@ -9,7 +9,11 @@ export class DatosDivisasService {
   constructor(private http: HttpClient) { }
 
   getSymbols(){
-    return this.http.get('http://data.fixer.io/api/symbols?access_key=b8b0eb6fba90baf3118de6d7faadf781');
+    return this.http.get('https://free.currencyconverterapi.com/api/v5/currencies');
+  }
+
+  getRate(base, final){
+    return this.http.get('https://free.currencyconverterapi.com/api/v5/convert?q='+ base +'_'+ final)
   }
 
 }

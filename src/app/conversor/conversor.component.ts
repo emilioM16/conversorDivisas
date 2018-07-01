@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class ConversorComponent implements OnInit {
 
   divisas$: Object;
+  cotizacionDivisa$: Object;
 
   conversorForm = new FormGroup ({
     divisaOrigen: new FormControl(),
@@ -21,9 +22,15 @@ export class ConversorComponent implements OnInit {
 
   ngOnInit() {
     this.data.getSymbols().subscribe(
-      data => this.divisas$ = data['symbols']
-    ); 
-    console.log(this.divisas$ )
+      data => this.divisas$ = data['results']
+    );
+    this.data.getRate('ARS','USD').subscribe(
+      data => this.cotizacionDivisa$ = data['results']['ARS_USD']
+    );
+  }
+
+  onChange(deviceValue){
+    console.log();
   }
 
 }

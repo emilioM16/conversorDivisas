@@ -10,24 +10,42 @@
           <form [formGroup]="conversorForm">
             <div class="form-group">
               De
-              <select class="form-control" formControlName="divisaOrigen">
-                <option
-                  *ngFor="let divisa of divisas$ | keys" 
-                  [value]="divisa.key"
-                >
-                  {{divisa.key}} - {{divisa.value}}
-                </option>
-              </select>
+              <div class="row justify-content-center">
+                <select 
+                  class="form-control text-center col-lg-9" 
+                  formControlName="divisaOrigen"
+                  (change)="onChange($event.target.value)"
+                  >
+                  <option
+                    *ngFor="let divisa of divisas$ | keys" 
+                    [attr.value]="divisa.key"
+                    [attr.selected]="divisa.key == 'ARS' ? true : null"
+                  >
+                  {{divisa.key}} - {{divisa.value.currencyName}}
+                  </option>
+                </select>
+              </div>
               a 
-              <select class="form-control" formControlName="divisaDestino">
-                <option
-                  *ngFor="let divisa of divisas$ | keys" 
-                  [value]="divisa.key"
-                >
-                  {{divisa.key}} - {{divisa.value}}
-                </option>
-              </select>
+              <div class="row justify-content-center">
+                <select 
+                  class="form-control text-center col-lg-9" 
+                  formControlName="divisaDestino"
+                  (change)="onChange($event.target.value)"
+                  >
+                  <option
+                    *ngFor="let divisa of divisas$ | keys" 
+                    [attr.value]="divisa.key"
+                    [attr.selected]="divisa.key == 'USD' ? true : null"
+                  >
+                    {{divisa.key}} - {{divisa.value.currencyName}}
+                  </option>
+                </select>
+              </div>
+            </div>
 
+            <div>
+              <h5>Cotización actual</h5>
+              {{divisas$[cotizacionDivisa$.fr].currencySymbol + ' ' +cotizacionDivisa$.val}}
             </div>
 
             <a href="#" class="btn btn-primary">Convertir</a>
