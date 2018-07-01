@@ -1,0 +1,43 @@
+<div id="conversorPanel" class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-6">
+      <div class="card text-center">
+        <div class="card-header">
+          Conversor
+        </div>
+        <div class="card-body">
+          <p class="card-text">Seleccione la divisa a convertir</p>
+          <form [formGroup]="conversorForm">
+            <div class="form-group">
+              De
+              <select class="form-control" formControlName="divisaOrigen">
+                <option
+                  *ngFor="let divisa of divisas$ | keys" 
+                  [value]="divisa.key"
+                >
+                  {{divisa.key}} - {{divisa.value}}
+                </option>
+              </select>
+              a 
+              <select class="form-control" formControlName="divisaDestino">
+                <option
+                  *ngFor="let divisa of divisas$ | keys" 
+                  [value]="divisa.key"
+                >
+                  {{divisa.key}} - {{divisa.value}}
+                </option>
+              </select>
+
+            </div>
+
+            <a href="#" class="btn btn-primary">Convertir</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
