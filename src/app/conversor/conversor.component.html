@@ -20,7 +20,7 @@
                   <option
                     *ngFor="let divisa of divisas$ | keys" 
                     [attr.value]="divisa.key"
-                    [attr.selected]="divisa.key == 'ARS' ? true : null"
+                    [attr.selected]="divisa.key == divisaOrigen ? true : null"
                   >
                   {{divisa.key}} - {{divisa.value.currencyName}}
                   </option>
@@ -37,7 +37,7 @@
                   <option
                     *ngFor="let divisa of divisas$ | keys" 
                     [attr.value]="divisa.key"
-                    [attr.selected]="divisa.key == 'USD' ? true : null"
+                    [attr.selected]="divisa.key == divisaDestino ? true : null"
                   >
                     {{divisa.key}} - {{divisa.value.currencyName}}
                   </option>
@@ -46,7 +46,18 @@
             </div>
 
             <div class="row justify-content-center">
-              <input type="number" class="form-control col-lg-4 col-md-3" id="valor" placeholder="Valor a convertir...">
+              <input 
+                type="number" 
+                name="valorAConvertir" 
+                (change)="convertir()"
+                [(ngModel)]="valorAConvertir" 
+                class="form-control col-lg-4 col-md-3" 
+                id="valor" 
+                placeholder="Valor a convertir...">
+            </div>
+
+            <div *ngIf="valorAConvertir!='0'" class="row justify-content-center">
+              <h5 class="col-lg-12 col-md-12">{{valorAConvertir}} = {{valorConvertido}}</h5>
             </div>
             
             <div *ngIf="divisas$!=null && cotizacionDivisa$!=null">

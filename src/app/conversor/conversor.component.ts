@@ -13,11 +13,14 @@ export class ConversorComponent implements OnInit {
   cotizacionDivisa$: Object;
   divisaOrigen: String;
   divisaDestino: String;
+  valorConvertido: Number;
+  valorAConvertir: string;
 
 
   constructor(private data: DatosDivisasService) {
-    this.divisaOrigen = 'ARS';
-    this.divisaDestino = 'USD';
+    this.divisaOrigen = 'USD';
+    this.divisaDestino = 'ARS';
+    this.valorAConvertir = '0';
   }
 
   ngOnInit() {
@@ -36,8 +39,9 @@ export class ConversorComponent implements OnInit {
     );
   }
 
-  onChangeDestino(value){
-    console.log(value);
+  convertir(){
+    this.valorConvertido =  parseInt(this.valorAConvertir) * this.cotizacionDivisa$['val'];
+    this.valorConvertido = parseFloat(this.valorConvertido.toFixed(2));
   }
 
 }
