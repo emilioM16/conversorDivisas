@@ -7,14 +7,15 @@
         </div>
         <div class="card-body">
           <p class="card-text">Seleccione la divisa a convertir</p>
-          <form [formGroup]="conversorForm">
+          <form>
             <div class="form-group">
               De
               <div class="row justify-content-center">
                 <select 
-                  class="form-control text-center col-lg-9" 
-                  formControlName="divisaOrigen"
-                  (change)="onChange($event.target.value)"
+                  class="form-control col-lg-10 col-md-8"
+                  (change)="onChangeDivisa()"
+                  [(ngModel)]="divisaOrigen"
+                  name="divisaOrigen"
                   >
                   <option
                     *ngFor="let divisa of divisas$ | keys" 
@@ -28,9 +29,10 @@
               a 
               <div class="row justify-content-center">
                 <select 
-                  class="form-control text-center col-lg-9" 
-                  formControlName="divisaDestino"
-                  (change)="onChange($event.target.value)"
+                  class="form-control col-lg-10 col-md-8" 
+                 [(ngModel)]="divisaDestino"
+                  name="divisaDestino"
+                  (change)="onChangeDivisa()"
                   >
                   <option
                     *ngFor="let divisa of divisas$ | keys" 
@@ -43,11 +45,14 @@
               </div>
             </div>
 
-            <div>
-              <h5>Cotización actual</h5>
-              {{divisas$[cotizacionDivisa$.fr].currencySymbol + ' ' +cotizacionDivisa$.val}}
+            <div class="row justify-content-center">
+              <input type="number" class="form-control col-lg-4 col-md-3" id="valor" placeholder="Valor a convertir...">
             </div>
-
+            
+            <div *ngIf="divisas$!=null && cotizacionDivisa$!=null">
+              <h5>Cotización actual</h5>
+              {{divisas$[cotizacionDivisa$.to].currencySymbol + ' ' +cotizacionDivisa$.val}}
+            </div>
             <a href="#" class="btn btn-primary">Convertir</a>
           </form>
         </div>

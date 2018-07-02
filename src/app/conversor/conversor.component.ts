@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { DatosDivisasService } from '../datos-divisas.service';
 import { Observable } from 'rxjs';
 
@@ -12,25 +11,33 @@ export class ConversorComponent implements OnInit {
 
   divisas$: Object;
   cotizacionDivisa$: Object;
+  divisaOrigen: String;
+  divisaDestino: String;
 
-  conversorForm = new FormGroup ({
-    divisaOrigen: new FormControl(),
-    divisaDestino: new FormControl()
-  })
 
-  constructor(private data: DatosDivisasService) { }
+  constructor(private data: DatosDivisasService) {
+    this.divisaOrigen = 'ARS';
+    this.divisaDestino = 'USD';
+  }
 
   ngOnInit() {
     this.data.getSymbols().subscribe(
       data => this.divisas$ = data['results']
     );
-    this.data.getRate('ARS','USD').subscribe(
-      data => this.cotizacionDivisa$ = data['results']['ARS_USD']
+    this.data.getRate(this.divisaOrigen,this.divisaDestino).subscribe(
+      data => this.cotizacionDivisa$ = data['results'][this.divisaOrigen+'_'+this.divisaDestino]
     );
   }
 
-  onChange(deviceValue){
-    console.log();
+  onChangeDivisa(){
+    console.log(this.divisaOrigen);
+    this.data.getRate(this.divisaOrigen, this.divisaDestino).subscribe(
+      data=> this.cotizacionDivisa$ = data['results'][this.divisaOrigen+'_'+this.divisaDestino]
+    );
+  }
+
+  onChangeDestino(value){
+    console.log(value);
   }
 
 }

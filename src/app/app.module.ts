@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ConversorComponent } from './conversor/conversor.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { KeysPipe } from './keys.pipe';
 
 
@@ -19,7 +19,7 @@ import { KeysPipe } from './keys.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
